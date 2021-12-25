@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-deployment
+  template:
+    metadata:
+      labels:
+        app: app-deployment
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.21.4
+          ports:
+            - containerPort: 80
+    env:
+      - name: SECRET_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: vault-secret
+            key: yourpass
+      - name: SECRET_EMAIL_ADDRESS
+        valueFrom:
+          secretKeyRef:
+            name: vault-secret
+            key: youremail

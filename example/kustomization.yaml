@@ -1,0 +1,6 @@
+commonLabels:
+  app: example
+resources:
+  - deployment.yaml
+generators:
+  - vault-secret-generator.yaml
